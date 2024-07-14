@@ -1,0 +1,67 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: bisque;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background-color: brown;
+    color: aqua;
+    padding: 1rem;
+    text-align: center;
+}
+
+main{
+    display: flexbox;
+}
+
+aside{
+    width: 15%;
+    background-color: azure;
+    padding: 1rem;
+}
+
+#films {
+    list-style: lower-alpha;
+    padding: 0;
+}
+
+#films li{
+    padding: 0.4rem;
+    border-bottom: 2px;
+    cursor: cell;
+}
+
+section{
+    width: 75%;
+    padding: 1rem;
+}
+
+movie-details{
+    background: white;
+    padding:0.5rem ;
+    border:1px ;
+    box-shadow: 10px;
+    text-align: right;
+}
+
+
+movie-details img {
+    max-width: 100%;
+    height: auto;
+}
+
+movies-details button{
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color:aliceblue;
+    color:white ;
+    cursor:pointer;
+
+}
+
+
+movie-details button:hover{
+    background-color: #555;
+}
