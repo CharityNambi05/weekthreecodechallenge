@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+#film-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: first baseline;
+    padding: 20px;
+}
+
+.film {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.film h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.film img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.film p {
+    margin: 5px 0;
+}
+
+.film strong {
+    font-weight: bold;
+}
