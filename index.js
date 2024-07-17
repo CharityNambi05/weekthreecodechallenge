@@ -19,7 +19,7 @@ async function fetchAndDisplayMovies() {
     }
 }
 
-// Display movie details
+//  movie details display
 function displayMovieDetails(movie) {
     const availableTickets = movie.capacity - movie.tickets_sold;
 
@@ -51,7 +51,7 @@ function populateMovieList(movies) {
 }
 
 // Handle ticket purchase
-//if all the tickets have been purchased it displays a sold out message
+//iif tickets are sold out display sould out message
 function buyTicket(movie) {
     if (movie.tickets_sold < movie.capacity) {
         movie.tickets_sold++;
@@ -61,5 +61,5 @@ function buyTicket(movie) {
     }
 }
 
-// Initialize the app
+// finalize the app
 window.onload = fetchAndDisplayMovies;
