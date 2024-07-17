@@ -1,57 +1,65 @@
-const films = [
-  {
-    id: "1",
-    title: "The Giant Gila Monster",
-    runtime: "108",
-    capacity: 30,
-    showtime: "04:00PM",
-    tickets_sold: 27,
-    description: "A giant lizard terrorizes a rural Texas community and a heroic teenager attempts to destroy the creature.",
-    poster: "https://www.gstatic.com/tv/thumb/v22vodart/2157/p2157_v_v8_ab.jpg"
-  },
-  {
-    id: "2",
-    title: "Manos: The Hands Of Fate",
-    runtime: "118",
-    capacity: 50,
-    showtime: "06:45PM",
-    tickets_sold: 44,
-    description: "A family gets lost on the road and stumbles upon a hidden, underground,  cult led by the fearsome Master and his servant Torgo.",
-    poster: "https://www.gstatic.com/tv/thumb/v22vodart/47781/p47781_v_v8_ac.jpg"
-  },
-  {
-    id: "3",
-    title: "Time Chasers",
-    runtime: "93",
-    capacity: 50,
-    showtime: "09:30PM",
-    tickets_sold: 31,
-    description: "An inventor comes up with a time machine, but must prevent its abuse at the hands of an evil C.E.O.",
-    poster: "https://www.gstatic.com/tv/thumb/v22vodart/23342/p23342_v_v8_ab.jpg"
-  }
-];
+const BASE_URL = 'http://localhost:4000/films';
 
-function displayFilms(films) {
-  const filmContainer = document.getElementById('film-container');
-
-  films.forEach(film => {
-    const filmDiv = document.createElement('div');
-    filmDiv.className = 'film';
-
-    filmDiv.innerHTML = `
-      <h2>${film.title}</h2>
-      <img src="${film.poster}" alt="${film.title}">
-      <p><strong>Showtime:</strong> ${film.showtime}</p>
-      <p><strong>Runtime:</strong> ${film.runtime} minutes</p>
-      <p><strong>Description:</strong> ${film.description}</p>
-      <p><strong>Capacity:</strong> ${film.capacity}</p>
-      <p><strong>Tickets Sold:</strong> ${film.tickets_sold}</p>
-    `;
-
-    filmContainer.appendChild(filmDiv);
-  });
+// Fetch and display movie details
+async function fetchAndDisplayMovies() {
+    //try is used to catch an error
+    try {
+        const response = await fetch(BASE_URL, { method: "GET" });
+        if (response.ok) {
+            const movies = await response.json();
+            displayMovieDetails(movies[0]);
+            populateMovieList(movies);
+        } else {
+            
+            console.error('Failed to fetch movies:', response.statusText);
+        }
+        //if an error is caught a message is displayed
+    } catch (error) {
+        console.error('Error fetching movies:', error);
+    }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  displayFilms(films);
-});
+// Display movie details
+function displayMovieDetails(movie) {
+    const availableTickets = movie.capacity - movie.tickets_sold;
+
+    document.getElementById('movie-poster').src = movie.poster;
+    document.getElementById('movie-title').textContent = movie.title;
+    document.getElementById('movie-runtime').textContent =`Runtime: ${movie.runtime} minutes;`
+    document.getElementById('movie-showtime').textContent = `Showtime: ${movie.showtime}`;
+    document.getElementById('movie-available-tickets').textContent = `Available Tickets: ${availableTickets}`;
+    document.getElementById('movie-description').textContent = movie.description;
+
+    const buyButton = document.getElementById('buy-ticket');
+    buyButton.disabled = availableTickets <= 0;
+    buyButton.textContent = availableTickets > 0 ? 'Buy Ticket' : 'Sold Out';
+    buyButton.onclick = () => buyTicket(movie);
+}
+
+// Populate the movie list
+function populateMovieList(movies) {
+    const movieList = document.getElementById('films');
+    movieList.innerHTML = ''; // Clear existing items
+
+    movies.forEach(movie => {
+        const movieItem = document.createElement('li');
+        movieItem.textContent = movie.title;
+        movieItem.classList.add('film', 'item');
+        movieItem.onclick = () => displayMovieDetails(movie);
+        movieList.appendChild(movieItem);
+    });
+}
+
+// Handle ticket purchase
+//if all the tickets have been purchased it displays a sold out message
+function buyTicket(movie) {
+    if (movie.tickets_sold < movie.capacity) {
+        movie.tickets_sold++;
+        displayMovieDetails(movie);
+    } else {
+        alert('Sorry, this showing is sold out!');
+    }
+}
+
+// Initialize the app
+window.onload = fetchAndDisplayMovies;

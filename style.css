@@ -1,43 +1,41 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    background-color: rgba(0, 0, 0, 0.692);
+    color: white;
 }
 
-#film-container {
+.container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: first baseline;
+}
+
+aside {
+    width: 20%;
+    padding: 20px;
+    background-color: #1bd6b7;
+}
+
+main {
+    width: 80%;
     padding: 20px;
 }
 
-.film {
-    background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 20px;
-    width: 300px;
+#movie-details {
     text-align: center;
 }
 
-.film h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.film img {
-    max-width: 100%;
+#movie-poster {
+    width: 200px;
     height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
 }
 
-.film p {
-    margin: 5px 0;
+#buy-ticket {
+    padding: 10px 20px;
+    background-color: #00ffc8;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-.film strong {
-    font-weight: bold;
+#buy-ticket:disabled {
+    background-color: #cccccc;
 }
